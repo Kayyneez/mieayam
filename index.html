@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You, My Everything</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #12030c;
+            color: #f3e8ee;
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Animasi Kado Bergetar */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .gift-bounce {
+            animation: bounce-slow 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" src="audios.mp3" loop></audio>
+
+
+    <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1a0813] transition-all duration-1000">
+        <div class="text-center p-6">
+            <p class="serif-font italic text-pink-300 text-lg mb-4">Ada sebuah kejutan untukmu...</p>
+            
+            <button id="gift-button" class="gift-bounce focus:outline-none cursor-pointer transform active:scale-95 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-pink-400 drop-shadow-[0_0_15px_rgba(244,143,177,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.5v16.5m-7.5-6h15M5.25 11.25h13.5M9.75 4.5c0-.414.336-.75.75-.75h3c.414 0 .75.336.75.75M9.75 4.5A2.25 2.25 0 007.5 6.75c0 .414.336.75.75.75h3.75m0-3A2.25 2.25 0 0114.25 6.75c0 .414-.336.75-.75.75H9.75" />
+                </svg>
+            </button>
+            
+            <p class="text-xs text-gray-400 mt-6 tracking-widest uppercase">Klik untuk membuka kado</p>
+        </div>
+    </div>
+
+
+    <div id="music-widget" class="fixed left-4 bottom-4 md:left-8 md:top-1/4 md:bottom-auto z-40 bg-[#220c1a]/80 backdrop-blur-md p-3 rounded-2xl border border-pink-900/40 w-44 shadow-2xl flex flex-col items-center text-center opacity-0 transition-opacity duration-1000 pointer-events-none">
+        <div class="w-36 h-36 rounded-xl overflow-hidden mb-3 bg-gray-800 shadow-md">
+            <img src="spotify.jpg" alt="Cover" class="w-full h-full object-cover grayscale brightness-90">
+        </div>
+        <div class="w-full px-1">
+            <h4 class="text-xs font-semibold text-pink-200 truncate">Amazing</h4>
+            <p class="text-[10px] text-gray-400 truncate mb-2">Rex Orange County</p>
+            
+            <button id="play-pause-btn" class="bg-pink-500/20 hover:bg-pink-500/40 border border-pink-400/30 rounded-full p-2 text-pink-300 transition-colors cursor-pointer">
+                <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <div id="main-content" class="min-h-screen px-4 md:pl-60 md:pr-12 py-12 max-w-6xl mx-auto flex flex-col justify-center items-center">
+        
+        <section class="min-h-screen flex flex-col justify-center items-center text-center space-y-4">
+            <span class="text-xs tracking-widest text-pink-300/80 uppercase">🌸 a love letter in bloom</span>
+            <h1 class="serif-font text-4xl md:text-6xl text-pink-100 font-light leading-tight">
+                For You,<br><span class="italic text-pink-300">My Everything</span>
+            </h1>
+            <p class="text-sm text-gray-400 max-w-sm font-light">Every petal holds a whisper of how much you mean to me.</p>
+            <div class="pt-8 text-pink-300/40 text-xl animate-bounce">🌸</div>
+            <p class="text-[10px] uppercase tracking-widest text-gray-500">Scroll Down to Discover</p>
+        </section>
+
+        <section class="w-full max-w-2xl bg-[#1e0a17]/60 border border-pink-950/50 rounded-3xl p-8 md:p-12 my-20 backdrop-blur-sm text-center space-y-6 shadow-xl">
+            <span class="text-xl">🌺 🌸 🌺</span>
+            <p class="serif-font italic text-pink-300 text-sm">from my heart</p>
+            <h2 class="serif-font text-3xl md:text-4xl text-pink-100">You are my <span class="italic text-pink-300">wildest dream</span> come true.</h2>
+            <p class="text-sm text-gray-300 leading-relaxed font-light">
+                In a world full of ordinary moments, you are the extraordinary one. The way you laugh, the way you care, the way you simply exist — it fills every corner of my world with something I never knew I needed.
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed font-light">
+                These flowers are not enough. No words ever could be. But they carry every unspoken feeling I hold for you, pressed between their petals like tiny love letters waiting to be found.
+            </p>
+            <p class="serif-font italic text-pink-300 pt-4">- Always yours 🌹</p>
+        </section>
+
+        <section class="w-full my-20">
+            <div class="text-center mb-12">
+                <p class="serif-font italic text-pink-400 text-sm mb-2">our secret garden</p>
+                <h2 class="serif-font text-3xl text-pink-100">Why I Love You</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">🌹</span>
+                    <h3 class="serif-font text-lg text-pink-200">Your Smile</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">It lights up every room and every corner of my heart simultaneously.</p>
+                </div>
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">💫</span>
+                    <h3 class="serif-font text-lg text-pink-200">Your Soul</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Rare, genuine, and more beautiful than any flower ever grown.</p>
+                </div>
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">🌸</span>
+                    <h3 class="serif-font text-lg text-pink-200">Your Kindness</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">The way you love the world makes me want to be better every single day.</p>
+                </div>
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">🧸</span>
+                    <h3 class="serif-font text-lg text-pink-200">Your Laughter</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">The sweetest melody in the universe. My favorite sound, always.</p>
+                </div>
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">🌺</span>
+                    <h3 class="serif-font text-lg text-pink-200">Your Strength</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">You carry so much grace through everything. I admire you endlessly.</p>
+                </div>
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                    <span class="text-2xl">💖</span>
+                    <h3 class="serif-font text-lg text-pink-200">Simply You</h3>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed">Every version of you, every moment — you are more than enough.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full my-20">
+            <div class="text-center mb-12">
+                <p class="serif-font italic text-pink-400 text-sm mb-2">captured in time</p>
+                <h2 class="serif-font text-3xl text-pink-100">Your Beautiful Pictures</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
+                    <img src="img1.jpg" alt="Foto 1" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">you</div>
+                </div>
+                <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
+                    <img src="img2.jpg" alt="Foto 2" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">are</div>
+                </div>
+                <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
+                    <img src="img3.jpg" alt="Foto 3" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">so</div>
+                </div>
+                <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
+                    <img src="img4.jpg" alt="Foto 4" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">beautiful</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen flex flex-col justify-center items-center text-center space-y-6">
+            <div class="text-xl">🌸 🌺 🌹 🌸 🌷</div>
+            <p class="serif-font italic text-pink-400 text-sm">always & forever</p>
+            <h2 class="serif-font text-4xl md:text-5xl text-pink-100">You Are Loved<br><span class="italic text-pink-300">Beyond Words</span></h2>
+            <p class="text-xs text-gray-400 max-w-md font-light leading-relaxed">
+                No matter where life takes us, know that somewhere in the universe, there is a garden blooming with every feeling I have ever held for you. You deserve the world. You deserve all the flowers. You deserve everything.
+            </p>
+            <div class="text-pink-400/80 text-xl pt-4 animate-pulse">💗</div>
+            <p class="serif-font text-xs italic text-pink-300">Made with love, just for you 🌸</p>
+        </section>
+
+    </div>
+
+
+    <script>
+        const giftScreen = document.getElementById('gift-screen');
+        const giftButton = document.getElementById('gift-button');
+        const musicWidget = document.getElementById('music-widget');
+        const bgMusic = document.getElementById('bg-music');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+
+        // Aksi ketika Kado Diklik
+        giftButton.addEventListener('click', () => {
+            // 1. Putar Musik Otomatis
+            bgMusic.play().catch(error => {
+                console.log("Autoplay dicegah browser, harus interaksi dulu:", error);
+            });
+
+            // 2. Transisi Menghilangkan Layar Kado (Slide Up & Fade Out)
+            giftScreen.style.transform = 'translateY(-100%)';
+            giftScreen.style.opacity = '0';
+            
+            // 3. Tampilkan Widget Pemutar Musik di Kiri
+            setTimeout(() => {
+                giftScreen.classList.add('hidden');
+                musicWidget.classList.remove('opacity-0', 'pointer-events-none');
+                musicWidget.classList.add('opacity-100', 'pointer-events-auto');
+            }, 1000);
+        });
+
+        // Pengatur Tombol Play / Pause Musik
+        playPauseBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            } else {
+                bgMusic.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+              </html>
