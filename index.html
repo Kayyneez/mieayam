@@ -19,131 +19,143 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* ================= APPLIKASI KADO 3D MERAH MUDA ESTETIK ================= */
+        /* ================= APPLIKASI KADO 3D REALISTIS & RAPI ================= */
         #gift-screen {
-            perspective: 1200px; 
+            perspective: 1000px; 
         }
 
         .gift-wrapper {
             position: relative;
             width: 180px;
-            height: 180px;
+            height: 200px;
             transform-style: preserve-3d;
-            transform: rotateX(-15deg) rotateY(-30deg); 
+            transform: rotateX(-18deg) rotateY(-35deg); 
             transition: transform 0.5s ease;
         }
 
-        /* Animasi Melayang Lembut Sebelum Diklik */
+        /* Animasi Mengapung Halus */
         .gift-float {
-            animation: floatAnim 3s infinite ease-in-out;
+            animation: floatAnim 3.5s infinite ease-in-out;
         }
 
         @keyframes floatAnim {
-            0%, 100% { transform: rotateX(-15deg) rotateY(-30deg) translateY(0); }
-            50% { transform: rotateX(-15deg) rotateY(-30deg) translateY(-15px); }
+            0%, 100% { transform: rotateX(-18deg) rotateY(-35deg) translateY(0); }
+            50% { transform: rotateX(-18deg) rotateY(-35deg) translateY(-12px); }
         }
 
-        /* Struktur Utama Badan Kado */
+        /* Badan Kado Utama */
         .gift-box {
             position: absolute;
-            width: 160px;
-            height: 140px;
-            bottom: 0;
-            left: 10px;
+            width: 150px;
+            height: 130px;
+            bottom: 10px;
+            left: 15px;
             transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
         }
 
-        /* Sisi-Sisi Badan Kado */
+        /* Sisi-sisi Wadah Kado */
         .box-face {
             position: absolute;
-            width: 160px;
-            height: 140px;
+            width: 150px;
+            height: 130px;
             background: #ff9ebb; 
-            border: 1px solid #ff85aa;
+            border: 1px solid #ff8cb0;
         }
-        .box-face.front  { transform: translateZ(80px); background: #ff9ebb; }
-        .box-face.back   { transform: rotateY(180deg) translateZ(80px); background: #e07b97; }
-        .box-face.right  { transform: rotateY(90deg) translateZ(80px); background: #f28da9; }
-        .box-face.left   { transform: rotateY(-90deg) translateZ(80px); background: #ffa6c1; }
-        .box-face.top    { transform: rotateX(90deg) translateZ(70px); height: 160px; background: #ffb3c9; }
-        .box-face.bottom { transform: rotateX(-90deg) translateZ(70px); height: 160px; background: #b85770; box-shadow: 0 0 30px rgba(0,0,0,0.6); }
+        .box-face.front  { transform: translateZ(75px); background: #ff9ebb; }
+        .box-face.back   { transform: rotateY(180deg) translateZ(75px); background: #db7691; }
+        .box-face.right  { transform: rotateY(90deg) translateZ(75px); background: #ed8aa6; }
+        .box-face.left   { transform: rotateY(-90deg) translateZ(75px); background: #ffa6c1; }
+        .box-face.top    { transform: rotateX(90deg) translateZ(65px); height: 150px; background: #ffb3c9; }
+        .box-face.bottom { transform: rotateX(-90deg) translateZ(65px); height: 150px; background: #ab4e65; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
 
-        /* Struktur Tutup Kado */
+        /* Tutup Kado - Dibuat presisi sedikit lebih besar dari wadah */
         .gift-lid {
             position: absolute;
-            width: 172px;
-            height: 40px;
-            top: 15px;
-            left: 4px;
+            width: 160px;
+            height: 35px;
+            top: 25px;
+            left: 10px;
             transform-style: preserve-3d;
             transform: translateZ(0);
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s;
             z-index: 10;
         }
 
-        /* Sisi Sisi Tutup Kado */
+        /* Sisi-sisi Tutup */
         .lid-face {
             position: absolute;
-            width: 172px;
+            width: 160px;
+            height: 35px;
+            background: #ff9ebb;
+            border: 1px solid #ff8cb0;
+        }
+        .lid-face.front  { transform: translateZ(80px); background: #ff9ebb; }
+        .lid-face.back   { transform: rotateY(180deg) translateZ(80px); background: #db7691; }
+        .lid-face.right  { transform: rotateY(90deg) translateZ(80px); background: #ed8aa6; }
+        .lid-face.left   { transform: rotateY(-90deg) translateZ(80px); background: #ffa6c1; }
+        .lid-face.top    { transform: rotateX(90deg) translateZ(17.5px); height: 160px; background: #ffbba1; background: #ffb3c9; }
+
+        /* Pita Kain Pembungkus */
+        .stripe-v {
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            left: 60px;
+            background: #fff0f5;
+            box-shadow: inset 0 0 6px rgba(255, 182, 193, 0.5);
+        }
+        .stripe-h {
+            position: absolute;
+            width: 30px;
+            height: 160px;
+            left: 65px;
+            background: #fff0f5;
+            transform: rotateX(95deg);
+            box-shadow: inset 0 0 6px rgba(255, 182, 193, 0.5);
+        }
+
+        /* PILAN PITA IKATAN 3D ATAS (Dibuat bulat rapi bervolume) */
+        .bow-outer {
+            position: absolute;
+            top: -42px;
+            left: 80px;
+            transform-style: preserve-3d;
+        }
+        .bow-loop-left, .bow-loop-right {
+            position: absolute;
+            width: 50px;
             height: 40px;
             background: #ff9ebb;
-            border: 1px solid #ff85aa;
+            border: 4px solid #fff0f5;
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-        .lid-face.front  { transform: translateZ(86px); background: #ff9ebb; }
-        .lid-face.back   { transform: rotateY(180deg) translateZ(86px); background: #e07b97; }
-        .lid-face.right  { transform: rotateY(90deg) translateZ(86px); background: #f28da9; }
-        .lid-face.left   { transform: rotateY(-90deg) translateZ(86px); background: #ffa6c1; }
-        .lid-face.top    { transform: rotateX(90deg) translateZ(20px); height: 172px; background: #ffb3c9; }
-
-        /* Pita Putih-Pink Bergaris */
-        .stripe-v, .stripe-h {
-            position: absolute;
-            background: #fff0f5; 
-            box-shadow: inset 0 0 4px rgba(255, 182, 193, 0.6);
+        .bow-loop-left {
+            transform: rotateZ(-30deg) translateX(-46px) rotateY(-15deg);
         }
-        .stripe-v { width: 34px; height: 100%; left: 63px; }
-        .stripe-h { width: 34px; height: 100%; left: 69px; transform: rotateX(90deg); } 
-
-        /* GAYA PITA SIMPUL IKATAN */
-        .bow-container {
-            position: absolute;
-            top: -55px;
-            left: 86px;
-            transform-style: preserve-3d;
-            transform: translateZ(0);
+        .bow-loop-right {
+            transform: rotateZ(30deg) translateX(-4px) rotateY(15deg);
         }
-        .bow-loop {
+        .bow-tie {
             position: absolute;
-            width: 55px;
-            height: 45px;
-            border: 12px solid #ff9ebb;
-            border-radius: 50%;
-            background: #fff0f5;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .bow-loop.left  { transform: rotateY(20deg) rotateZ(-35deg) translateX(-45px); }
-        .bow-loop.right { transform: rotateY(-20deg) rotateZ(35deg) translateX(5px); }
-        
-        .bow-center {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: #ff9ebb;
+            width: 22px;
+            height: 22px;
+            background: #ff8cb0;
             border: 2px solid #fff0f5;
             border-radius: 6px;
-            left: -12px;
+            left: -11px;
             top: 10px;
-            transform: translateZ(10px);
+            transform: translateZ(5px);
         }
 
-        /* ANIMASI REAKSI SAAT KADO DIBUKA */
+        /* EFEK KADO MELEDAK TERBUKA */
         .gift-wrapper.open-box .gift-lid {
-            transform: translateY(-350px) rotateX(45deg) rotateY(45deg) scale(0.8);
+            transform: translateY(-300px) rotateX(45deg) rotateZ(35deg) scale(0.7);
             opacity: 0;
         }
         .gift-wrapper.open-box .gift-box {
-            transform: translateY(200px) scale(0.5);
+            transform: translateY(180px) scale(0.4);
             opacity: 0;
         }
     </style>
@@ -160,7 +172,7 @@
             <div id="gift-interactive" class="gift-wrapper gift-float cursor-pointer">
                 <div class="gift-lid">
                     <div class="lid-face top">
-                        <div class="stripe-v" style="left: 69px;"></div>
+                        <div class="stripe-v" style="left: 65px;"></div>
                         <div class="stripe-h"></div>
                     </div>
                     <div class="lid-face front"><div class="stripe-v"></div></div>
@@ -168,10 +180,10 @@
                     <div class="lid-face right"><div class="stripe-v"></div></div>
                     <div class="lid-face left"><div class="stripe-v"></div></div>
 
-                    <div class="bow-container">
-                        <div class="bow-loop left"></div>
-                        <div class="bow-loop right"></div>
-                        <div class="bow-center"></div>
+                    <div class="bow-outer">
+                        <div class="bow-loop-left"></div>
+                        <div class="bow-loop-right"></div>
+                        <div class="bow-tie"></div>
                     </div>
                 </div>
 
@@ -220,7 +232,6 @@
             </h1>
             <p class="text-sm text-gray-400 max-w-sm font-light">Every petal holds a whisper of how much you mean to me.</p>
             <div class="pt-8 text-pink-300/40 text-xl animate-bounce">🌸</div>
-            <p class="text-[10px] uppercase tracking-widest text-gray-500">Enjoy the cinematic letter...</p>
         </section>
 
         <section class="w-full max-w-2xl bg-[#1e0a17]/60 border border-pink-950/50 rounded-3xl p-8 md:p-12 my-20 backdrop-blur-sm text-center space-y-6 shadow-xl">
@@ -243,32 +254,32 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">🌹</span>
                     <h3 class="serif-font text-lg text-pink-200">Your Smile</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">It lights up every room and every corner of my heart simultaneously.</p>
                 </div>
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">💫</span>
                     <h3 class="serif-font text-lg text-pink-200">Your Soul</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">Rare, genuine, and more beautiful than any flower ever grown.</p>
                 </div>
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">🌸</span>
                     <h3 class="serif-font text-lg text-pink-200">Your Kindness</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">The way you love the world makes me want to be better every single day.</p>
                 </div>
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">🧸</span>
                     <h3 class="serif-font text-lg text-pink-200">Your Laughter</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">The sweetest melody in the universe. My favorite sound, always.</p>
                 </div>
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">🌺</span>
                     <h3 class="serif-font text-lg text-pink-200">Your Strength</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">You carry so much grace through everything. I admire you endlessly.</p>
                 </div>
-                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3 hover:border-pink-800/60 transition-colors">
+                <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">💖</span>
                     <h3 class="serif-font text-lg text-pink-200">Simply You</h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">Every version of you, every moment — you are more than enough.</p>
@@ -276,7 +287,7 @@
             </div>
         </section>
 
-        <section id="gallery-target" class="w-full my-20">
+        <section class="w-full my-20">
             <div class="text-center mb-12">
                 <p class="serif-font italic text-pink-400 text-sm mb-2">captured in time</p>
                 <h2 class="serif-font text-3xl text-pink-100">Your Beautiful Pictures</h2>
@@ -284,19 +295,19 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                 <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
-                    <img src="img1.jpg" alt="Foto 1" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <img src="img1.jpg" alt="Foto 1" class="w-full h-full object-cover grayscale brightness-75">
                     <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">you</div>
                 </div>
                 <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
-                    <img src="img2.jpg" alt="Foto 2" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <img src="img2.jpg" alt="Foto 2" class="w-full h-full object-cover grayscale brightness-75">
                     <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">are</div>
                 </div>
                 <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
-                    <img src="img3.jpg" alt="Foto 3" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <img src="img3.jpg" alt="Foto 3" class="w-full h-full object-cover grayscale brightness-75">
                     <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">so</div>
                 </div>
                 <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
-                    <img src="img4.jpg" alt="Foto 4" class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-500">
+                    <img src="img4.jpg" alt="Foto 4" class="w-full h-full object-cover grayscale brightness-75">
                     <div class="absolute bottom-2 left-0 right-0 text-center text-[10px] text-pink-300/70 italic">beautiful</div>
                 </div>
             </div>
@@ -307,10 +318,9 @@
             <p class="serif-font italic text-pink-400 text-sm">always & forever</p>
             <h2 class="serif-font text-4xl md:text-5xl text-pink-100">You Are Loved<br><span class="italic text-pink-300">Beyond Words</span></h2>
             <p class="text-xs text-gray-400 max-w-md font-light leading-relaxed">
-                No matter where life takes us, know that somewhere in the universe, there is a garden blooming with every feeling I have ever held for you. You deserve the world. You deserve all the flowers. You deserve everything.
+                No matter where life takes us, know that somewhere in the universe, there is a garden blooming with every feeling I have ever held for you.
             </p>
             <div class="text-pink-400/80 text-xl pt-4 animate-pulse">💗</div>
-            <p class="serif-font text-xs italic text-pink-300">Made with love, just for you 🌸</p>
         </section>
     </div>
 
@@ -323,36 +333,50 @@
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         
-        let slideInterval; 
+        let slideInterval;
+        let resumeTimeout;
+        let isAutoScrolling = false;
 
-        // Fungsi Slide Otomatis Kebawah Pelan-pelan (Cinematic Mode)
+        // Fungsi Mulai Gerak Otomatis
         function startAutoSlide() {
-            // Menggeser layar kebawah sebesar 1 pixel setiap 15 milidetik (sangat halus)
+            if (isAutoScrolling) return;
+            isAutoScrolling = true;
+            
             slideInterval = setInterval(() => {
                 window.scrollBy(0, 1);
-                
-                // Jika sudah mentok paling bawah, otomatis matikan fungsi slide
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                // Jika halaman sudah mentok paling bawah, hentikan semuanya
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
                     clearInterval(slideInterval);
+                    isAutoScrolling = false;
                 }
-            }, 15);
+            }, 16); // Kecepatan gerak konstan dan stabil
         }
 
-        // Matikan auto-slide jika pacarmu menyentuh layar / scroll sendiri
-        function stopAutoSlideOnInteraction() {
+        // Fungsi Jeda Otomatis Saat Disentuh User
+        function pauseAutoSlide() {
+            // Hentikan interval pergerakan layar saat ini
             clearInterval(slideInterval);
-            // Hapus event listener agar hemat memory setelah dimatikan
-            window.removeEventListener('wheel', stopAutoSlideOnInteraction);
-            window.removeEventListener('touchmove', stopAutoSlideOnInteraction);
+            isAutoScrolling = false;
+
+            // Hapus sisa timer resume lama jika user terus-menerus men-scroll
+            clearTimeout(resumeTimeout);
+
+            // Setel ulang timer: jika didiamkan selama 3 detik (3000ms), lanjut jalan lagi
+            resumeTimeout = setTimeout(() => {
+                // Pastikan posisi layar belum mentok bawah sebelum lanjut jalan
+                if ((window.innerHeight + window.scrollY) < document.body.offsetHeight - 5) {
+                    startAutoSlide();
+                }
+            }, 3000);
         }
 
-        // Trigger Pembukaan Kado
+        // Jalankan Fitur Buka Hadiah
         giftInteractive.addEventListener('click', function() {
             this.classList.remove('gift-float');
             this.classList.add('open-box');
 
             setTimeout(() => {
-                bgMusic.play().catch(err => console.log("Autoplay ditahan browser:", err));
+                bgMusic.play().catch(err => console.log("Autoplay block bypass:", err));
             }, 350);
 
             setTimeout(() => {
@@ -366,24 +390,25 @@
                 musicWidget.classList.remove('opacity-0', 'pointer-events-none');
                 musicWidget.classList.add('opacity-100', 'pointer-events-auto');
 
-                // 1. Lompat ke halaman utama pertama
+                // Scroll pertama menuju gerbang konten utama
                 window.scrollTo({
                     top: window.innerHeight,
                     behavior: 'smooth'
                 });
 
-                // 2. Tunggu 1.5 detik (menunggu scroll pertama selesai), lalu mulai SLIDE OTOMATIS
+                // Mulai mengaktifkan scroll otomatis cerdas setelah 1.5 detik halaman bergeser
                 setTimeout(() => {
                     startAutoSlide();
-                    // Dengarkan jika pacar menyentuh/mengatur scroll manual untuk mematikan auto slide
-                    window.addEventListener('wheel', stopAutoSlideOnInteraction);
-                    window.addEventListener('touchmove', stopAutoSlideOnInteraction);
+                    
+                    // Deteksi interaksi pengguna (Mouse wheel, trackpad, sentuhan layar HP)
+                    window.addEventListener('wheel', pauseAutoSlide, { passive: true });
+                    window.addEventListener('touchmove', pauseAutoSlide, { passive: true });
                 }, 1500);
 
             }, 2000);
         });
 
-        // Kontrol musik manual
+        // Pengatur Widget Musik
         playPauseBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play();
@@ -397,4 +422,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
