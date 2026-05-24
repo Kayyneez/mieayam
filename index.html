@@ -18,105 +18,134 @@
         .serif-font {
             font-family: 'Playfair Display', serif;
         }
-        html {
-            scroll-behavior: smooth;
-        }
 
-        /* --- STYLING KADO 3D YANG LEBIH 'WAH' --- */
+        /* ================= APPLIKASI KADO 3D MERAH MUDA ESTETIK ================= */
         #gift-screen {
-            perspective: 1000px; /* Memberikan efek 3D kedalaman */
+            perspective: 1200px; 
         }
 
-        .gift-container {
-            width: 150px;
-            height: 150px;
+        .gift-wrapper {
             position: relative;
+            width: 180px;
+            height: 180px;
             transform-style: preserve-3d;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .gift-container:hover {
-            transform: rotateY(15deg) rotateX(10deg);
+            transform: rotateX(-15deg) rotateY(-30deg); 
+            transition: transform 0.5s ease;
         }
 
-        /* Styling Sisi Kubus Kado */
-        .gift-box-face {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background-color: #4a0d24; /* Deep Burgundy/Pink Tua */
-            border: 2px solid #5e112e;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Animasi Melayang Lembut Sebelum Diklik */
+        .gift-float {
+            animation: floatAnim 3s infinite ease-in-out;
         }
 
-        /* Mengatur posisi 3D masing-masing sisi */
-        .front  { transform: translateZ(75px); }
-        .back   { transform: rotateY(180deg) translateZ(75px); }
-        .right  { transform: rotateY(90deg) translateZ(75px); }
-        .left   { transform: rotateY(-90deg) translateZ(75px); }
-        .top    { transform: rotateX(90deg) translateZ(75px); height: 150px; background-color: #5e112e; }
-        .bottom { transform: rotateX(-90deg) translateZ(75px); background-color: #330818; }
-
-        /* Styling Pita Kado (Vertical & Horizontal) */
-        .ribbon-v, .ribbon-h {
-            position: absolute;
-            background-color: #d4af37; /* Gold */
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        @keyframes floatAnim {
+            0%, 100% { transform: rotateX(-15deg) rotateY(-30deg) translateY(0); }
+            50% { transform: rotateX(-15deg) rotateY(-30deg) translateY(-15px); }
         }
-        .ribbon-v { width: 30px; height: 100%; left: 60px; }
-        .ribbon-h { width: 100%; height: 30px; top: 60px; }
 
-        /* Tutup Kado (Lid) */
-        .gift-lid {
+        /* Struktur Utama Badan Kado */
+        .gift-box {
             position: absolute;
             width: 160px;
-            height: 40px;
-            background-color: #5e112e; /* Sedikit lebih terang dari box */
-            top: -20px;
-            left: -5px;
+            height: 140px;
+            bottom: 0;
+            left: 10px;
             transform-style: preserve-3d;
-            transform: translateZ(76px); /* Sedikit di depan box */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: transform 1s ease-out, opacity 1s ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        /* Pita Emas di Tutup */
-        .lid-ribbon {
+
+        /* Sisi-Sisi Badan Kado */
+        .box-face {
             position: absolute;
-            width: 30px;
-            height: 160px;
-            background-color: #d4af37;
-            transform: rotateX(90deg);
+            width: 160px;
+            height: 140px;
+            background: #ff9ebb; 
+            border: 1px solid #ff85aa;
         }
+        .box-face.front  { transform: translateZ(80px); background: #ff9ebb; }
+        .box-face.back   { transform: rotateY(180deg) translateZ(80px); background: #e07b97; }
+        .box-face.right  { transform: rotateY(90deg) translateZ(80px); background: #f28da9; }
+        .box-face.left   { transform: rotateY(-90deg) translateZ(80px); background: #ffa6c1; }
+        .box-face.top    { transform: rotateX(90deg) translateZ(70px); height: 160px; background: #ffb3c9; }
+        .box-face.bottom { transform: rotateX(-90deg) translateZ(70px); height: 160px; background: #b85770; box-shadow: 0 0 30px rgba(0,0,0,0.6); }
+
+        /* Struktur Tutup Kado */
+        .gift-lid {
+            position: absolute;
+            width: 172px;
+            height: 40px;
+            top: 15px;
+            left: 4px;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+            z-index: 10;
+        }
+
+        /* Sisi Sisi Tutup Kado */
+        .lid-face {
+            position: absolute;
+            width: 172px;
+            height: 40px;
+            background: #ff9ebb;
+            border: 1px solid #ff85aa;
+        }
+        .lid-face.front  { transform: translateZ(86px); background: #ff9ebb; }
+        .lid-face.back   { transform: rotateY(180deg) translateZ(86px); background: #e07b97; }
+        .lid-face.right  { transform: rotateY(90deg) translateZ(86px); background: #f28da9; }
+        .lid-face.left   { transform: rotateY(-90deg) translateZ(86px); background: #ffa6c1; }
+        .lid-face.top    { transform: rotateX(90deg) translateZ(20px); height: 172px; background: #ffb3c9; }
+
+        /* Pita Putih-Pink Bergaris */
+        .stripe-v, .stripe-h {
+            position: absolute;
+            background: #fff0f5; 
+            box-shadow: inset 0 0 4px rgba(255, 182, 193, 0.6);
+        }
+        .stripe-v { width: 34px; height: 100%; left: 63px; }
+        .stripe-h { width: 34px; height: 100%; left: 69px; transform: rotateX(90deg); } 
+
+        /* GAYA PITA SIMPUL IKATAN */
+        .bow-container {
+            position: absolute;
+            top: -55px;
+            left: 86px;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+        .bow-loop {
+            position: absolute;
+            width: 55px;
+            height: 45px;
+            border: 12px solid #ff9ebb;
+            border-radius: 50%;
+            background: #fff0f5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .bow-loop.left  { transform: rotateY(20deg) rotateZ(-35deg) translateX(-45px); }
+        .bow-loop.right { transform: rotateY(-20deg) rotateZ(35deg) translateX(5px); }
         
-        /* --- ANIMASI --- */
-        /* Animasi Bergetar Awal */
-        @keyframes wobble {
-            0%, 100% { transform: rotateY(0) rotateX(0); }
-            25% { transform: rotateY(5deg) rotateX(2deg); }
-            75% { transform: rotateY(-5deg) rotateX(-2deg); }
-        }
-        .gift-wobble {
-            animation: wobble 3s infinite ease-in-out;
-        }
-
-        /* Animasi Buka Kado (Terbang ke Atas & Menghilang) */
-        .gift-container.open .gift-lid {
-            transform: translateZ(76px) translateY(-200px) rotateX(-45deg);
-            opacity: 0;
-        }
-        .gift-container.open .ribbon-v,
-        .gift-container.open .ribbon-h {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        .bow-center {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #ff9ebb;
+            border: 2px solid #fff0f5;
+            border-radius: 6px;
+            left: -12px;
+            top: 10px;
+            transform: translateZ(10px);
         }
 
+        /* ANIMASI REAKSI SAAT KADO DIBUKA */
+        .gift-wrapper.open-box .gift-lid {
+            transform: translateY(-350px) rotateX(45deg) rotateY(45deg) scale(0.8);
+            opacity: 0;
+        }
+        .gift-wrapper.open-box .gift-box {
+            transform: translateY(200px) scale(0.5);
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -124,35 +153,39 @@
     <audio id="bg-music" src="audios.mp3" loop></audio>
 
 
-    <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1a0813] transition-all duration-1000 origin-top">
+    <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#180612] transition-all duration-1000">
         <div class="text-center p-6 flex flex-col items-center">
-            <p class="serif-font italic text-pink-300 text-lg mb-12">Ada sebuah kejutan untukmu...</p>
+            <p class="serif-font italic text-pink-300 text-lg mb-20 tracking-wide">Ada sebuah kejutan manis untukmu...</p>
             
-            <div id="gift-box" class="gift-container gift-wobble">
-                <div class="gift-box-face front">
-                    <div class="ribbon-v"></div>
-                    <div class="ribbon-h"></div>
-                </div>
-                <div class="gift-box-face back">
-                    <div class="ribbon-v"></div>
-                </div>
-                <div class="gift-box-face right">
-                    <div class="ribbon-v"></div>
-                </div>
-                <div class="gift-box-face left">
-                    <div class="ribbon-v"></div>
-                </div>
-                <div class="gift-box-face top"></div>
-                <div class="gift-box-face bottom"></div>
-                
+            <div id="gift-interactive" class="gift-wrapper gift-float cursor-pointer">
                 <div class="gift-lid">
-                    <div class="lid-ribbon"></div>
-                    <div class="absolute w-12 h-12 bg-[#d4af37] rounded-full transform rotateY(45deg) -top-6"></div>
-                    <div class="absolute w-12 h-12 bg-[#d4af37] rounded-full transform rotateY(-45deg) -top-6"></div>
+                    <div class="lid-face top">
+                        <div class="stripe-v" style="left: 69px;"></div>
+                        <div class="stripe-h"></div>
+                    </div>
+                    <div class="lid-face front"><div class="stripe-v"></div></div>
+                    <div class="lid-face back"><div class="stripe-v"></div></div>
+                    <div class="lid-face right"><div class="stripe-v"></div></div>
+                    <div class="lid-face left"><div class="stripe-v"></div></div>
+
+                    <div class="bow-container">
+                        <div class="bow-loop left"></div>
+                        <div class="bow-loop right"></div>
+                        <div class="bow-center"></div>
+                    </div>
+                </div>
+
+                <div class="gift-box">
+                    <div class="box-face front"><div class="stripe-v"></div></div>
+                    <div class="box-face back"><div class="stripe-v"></div></div>
+                    <div class="box-face right"><div class="stripe-v"></div></div>
+                    <div class="box-face left"><div class="stripe-v"></div></div>
+                    <div class="box-face top"></div>
+                    <div class="box-face bottom"></div>
                 </div>
             </div>
             
-            <p class="text-xs text-gray-400 mt-16 tracking-widest uppercase animate-pulse">Klik Kado Untuk Membuka</p>
+            <p class="text-xs text-pink-300/60 mt-24 tracking-widest uppercase animate-pulse">Sentuh kado untuk membuka</p>
         </div>
     </div>
 
@@ -187,7 +220,7 @@
             </h1>
             <p class="text-sm text-gray-400 max-w-sm font-light">Every petal holds a whisper of how much you mean to me.</p>
             <div class="pt-8 text-pink-300/40 text-xl animate-bounce">🌸</div>
-            <p class="text-[10px] uppercase tracking-widest text-gray-500">Scroll Down to Discover</p>
+            <p class="text-[10px] uppercase tracking-widest text-gray-500">Enjoy the cinematic letter...</p>
         </section>
 
         <section class="w-full max-w-2xl bg-[#1e0a17]/60 border border-pink-950/50 rounded-3xl p-8 md:p-12 my-20 backdrop-blur-sm text-center space-y-6 shadow-xl">
@@ -243,7 +276,7 @@
             </div>
         </section>
 
-        <section class="w-full my-20">
+        <section id="gallery-target" class="w-full my-20">
             <div class="text-center mb-12">
                 <p class="serif-font italic text-pink-400 text-sm mb-2">captured in time</p>
                 <h2 class="serif-font text-3xl text-pink-100">Your Beautiful Pictures</h2>
@@ -279,58 +312,78 @@
             <div class="text-pink-400/80 text-xl pt-4 animate-pulse">💗</div>
             <p class="serif-font text-xs italic text-pink-300">Made with love, just for you 🌸</p>
         </section>
-
     </div>
-
 
     <script>
         const giftScreen = document.getElementById('gift-screen');
-        const giftBox = document.getElementById('gift-box');
-        const mainContent = document.getElementById('main-content');
+        const giftInteractive = document.getElementById('gift-interactive');
         const musicWidget = document.getElementById('music-widget');
         const bgMusic = document.getElementById('bg-music');
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
+        
+        let slideInterval; 
 
-        // Aksi ketika Kado Diklik
-        giftBox.addEventListener('click', function() {
-            // 1. Tambahkan class 'open' untuk memicu animasi tutup kado terbang
-            this.classList.remove('gift-wobble'); // Hentikan getaran
-            this.classList.add('open'); 
+        // Fungsi Slide Otomatis Kebawah Pelan-pelan (Cinematic Mode)
+        function startAutoSlide() {
+            // Menggeser layar kebawah sebesar 1 pixel setiap 15 milidetik (sangat halus)
+            slideInterval = setInterval(() => {
+                window.scrollBy(0, 1);
+                
+                // Jika sudah mentok paling bawah, otomatis matikan fungsi slide
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    clearInterval(slideInterval);
+                }
+            }, 15);
+        }
 
-            // 2. Putar Musik Otomatis (Amazing - Rex Orange County)
-            // Menggunakan sedikit delay agar pas dengan tutup kado terangkat
+        // Matikan auto-slide jika pacarmu menyentuh layar / scroll sendiri
+        function stopAutoSlideOnInteraction() {
+            clearInterval(slideInterval);
+            // Hapus event listener agar hemat memory setelah dimatikan
+            window.removeEventListener('wheel', stopAutoSlideOnInteraction);
+            window.removeEventListener('touchmove', stopAutoSlideOnInteraction);
+        }
+
+        // Trigger Pembukaan Kado
+        giftInteractive.addEventListener('click', function() {
+            this.classList.remove('gift-float');
+            this.classList.add('open-box');
+
             setTimeout(() => {
-                bgMusic.play().catch(error => {
-                    console.log("Autoplay dicegah browser, harus interaksi dulu:", error);
-                });
-            }, 300);
+                bgMusic.play().catch(err => console.log("Autoplay ditahan browser:", err));
+            }, 350);
 
-            // 3. Transisi Menghilangkan Layar Kado (Menyusut ke Atas & Fade Out)
             setTimeout(() => {
-                giftScreen.style.transform = 'scaleY(0)';
                 giftScreen.style.opacity = '0';
-            }, 1200); // Memberikan waktu animasi kado terbuka dulu
-            
-            // 4. Tampilkan Widget Pemutar Musik di Kiri & Scroll Otomatis ke Konten
+                giftScreen.style.pointerEvents = 'none';
+            }, 1000);
+
             setTimeout(() => {
                 giftScreen.classList.add('hidden');
                 
-                // Tampilkan Widget Musik
                 musicWidget.classList.remove('opacity-0', 'pointer-events-none');
                 musicWidget.classList.add('opacity-100', 'pointer-events-auto');
 
-                // Scroll otomatis ke bawah (Section Pembuka)
+                // 1. Lompat ke halaman utama pertama
                 window.scrollTo({
                     top: window.innerHeight,
                     behavior: 'smooth'
                 });
 
-            }, 2200); // Total waktu transisi sebelum masuk menu utama
+                // 2. Tunggu 1.5 detik (menunggu scroll pertama selesai), lalu mulai SLIDE OTOMATIS
+                setTimeout(() => {
+                    startAutoSlide();
+                    // Dengarkan jika pacar menyentuh/mengatur scroll manual untuk mematikan auto slide
+                    window.addEventListener('wheel', stopAutoSlideOnInteraction);
+                    window.addEventListener('touchmove', stopAutoSlideOnInteraction);
+                }, 1500);
+
+            }, 2000);
         });
 
-        // Pengatur Tombol Play / Pause Musik
+        // Kontrol musik manual
         playPauseBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play();
@@ -344,4 +397,4 @@
         });
     </script>
 </body>
-                        </html>
+</html>
