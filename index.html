@@ -19,137 +19,51 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* ================= KADO 3D PRESISI & SIMETRIS ================= */
-        #gift-screen {
-            perspective: 1000px; 
-        }
-
-        .gift-wrapper {
+        /* ================= KADO 3D CLEAN VIEW ================= */
+        .gift-container {
             position: relative;
-            width: 160px;
-            height: 160px;
-            transform-style: preserve-3d;
-            transform: rotateX(-20deg) rotateY(-35deg); 
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 220px;
+            height: 220px;
+            cursor: pointer;
         }
 
-        /* Animasi Mengapung Halus & Stabil */
+        /* Animasi mengapung yang smooth */
         .gift-float {
-            animation: floatAnim 4s infinite ease-in-out;
+            animation: floatAnim 3s infinite ease-in-out;
         }
 
         @keyframes floatAnim {
-            0%, 100’% { transform: rotateX(-20deg) rotateY(-35deg) translateY(0); }
-            50% { transform: rotateX(-20deg) rotateY(-35deg) translateY(-10px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* BADAN KADO (Symmetrical Box) */
-        .gift-box {
+        /* Tutup Kado */
+        .gift-lid-img {
             position: absolute;
-            width: 140px;
-            height: 120px;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
+        }
+
+        /* Badan Kado */
+        .gift-box-img {
+            position: absolute;
+            width: 100%;
             bottom: 0;
-            left: 10px;
-            transform-style: preserve-3d;
-            transition: transform 1s ease-in-out, opacity 0.8s;
-        }
-
-        .box-face {
-            position: absolute;
-            width: 140px;
-            height: 120px;
-            background: #ffa2bc; 
-            border: 1px solid #ff8fae;
-        }
-        .box-face.front  { transform: translateZ(70px); background: #ffa2bc; }
-        .box-face.back   { transform: rotateY(180deg) translateZ(70px); background: #e07792; }
-        .box-face.right  { transform: rotateY(90deg) translateZ(70px); background: #f28da7; }
-        .box-face.left   { transform: rotateY(-90deg) translateZ(70px); background: #ffb3c9; }
-        .box-face.top    { transform: rotateX(90deg) translateZ(60px); height: 140px; background: #ffbad0; }
-        .box-face.bottom { transform: rotateX(-90deg) translateZ(60px); height: 140px; background: #a6445c; box-shadow: 0 20px 45px rgba(0,0,0,0.6); }
-
-        /* TUTUP KADO (Slightly larger to fit perfectly on top) */
-        .gift-lid {
-            position: absolute;
-            width: 148px;
-            height: 28px;
-            top: 12px;
-            left: 6px;
-            transform-style: preserve-3d;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
+            left: 0;
             z-index: 10;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
         }
 
-        .lid-face {
-            position: absolute;
-            width: 148px;
-            height: 28px;
-            background: #ffa2bc;
-            border: 1px solid #ff8fae;
-        }
-        .lid-face.front  { transform: translateZ(74px); background: #ffa2bc; }
-        .lid-face.back   { transform: rotateY(180deg) translateZ(74px); background: #e07792; }
-        .lid-face.right  { transform: rotateY(90deg) translateZ(74px); background: #f28da7; }
-        .lid-face.left   { transform: rotateY(-90deg) translateZ(74px); background: #ffb3c9; }
-        .lid-face.top    { transform: rotateX(90deg) translateZ(14px); height: 148px; background: #ffbad0; }
-
-        /* PITA KAIN PUTIH SUTRA */
-        .stripe-v {
-            position: absolute;
-            width: 28px;
-            height: 100%;
-            left: 56px;
-            background: #fff5f8;
-            box-shadow: inset 0 0 4px rgba(255, 145, 175, 0.3);
-        }
-        .stripe-h {
-            position: absolute;
-            width: 28px;
-            height: 148px;
-            left: 60px;
-            background: #fff5f8;
-            transform: rotateX(90deg);
-            box-shadow: inset 0 0 4px rgba(255, 145, 175, 0.3);
-        }
-
-        /* SIMPUL PITA ATAS BULAT CANTIK (Puffy Ribbon System) */
-        .bow-container {
-            position: absolute;
-            top: -36px;
-            left: 74px;
-            transform-style: preserve-3d;
-        }
-        .bow-loop-l, .bow-loop-r {
-            position: absolute;
-            width: 44px;
-            height: 36px;
-            background: #ffa2bc;
-            border: 5px solid #fff5f8;
-            border-radius: 50% 50% 45% 45%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        .bow-loop-l { transform: rotateZ(-25deg) translateX(-40px) rotateY(-10deg); }
-        .bow-loop-r { transform: rotateZ(25deg) translateX(-4px) rotateY(10deg); }
-        
-        .bow-knot {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff8fae;
-            border: 2px solid #fff5f8;
-            border-radius: 5px;
-            left: -10px;
-            top: 8px;
-            transform: translateZ(4px);
-        }
-
-        /* EFEK KADO DIBUKA */
-        .gift-wrapper.open-box .gift-lid {
-            transform: translateY(-280px) rotateX(45deg) rotateZ(30deg) scale(0.6);
+        /* EFEK BUKA KADO MELEDAK ELEGAN */
+        .gift-container.open-box .gift-lid-img {
+            transform: translateY(-150px) rotate(-15deg) scale(0.8);
             opacity: 0;
         }
-        .gift-wrapper.open-box .gift-box {
-            transform: translateY(150px) scale(0.4);
+        .gift-container.open-box .gift-box-img {
+            transform: translateY(100px) scale(0.8);
             opacity: 0;
         }
     </style>
@@ -161,37 +75,26 @@
 
     <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#160511] transition-all duration-1000">
         <div class="text-center p-6 flex flex-col items-center">
-            <p class="serif-font italic text-pink-300 text-lg mb-24 tracking-wide">Ada sebuah kejutan manis untukmu...</p>
+            <p class="serif-font italic text-pink-300 text-lg mb-20 tracking-wide">Ada sebuah kejutan manis untukmu...</p>
             
-            <div id="gift-interactive" class="gift-wrapper gift-float cursor-pointer">
-                <div class="gift-lid">
-                    <div class="lid-face top">
-                        <div class="stripe-v" style="left: 60px;"></div>
-                        <div class="stripe-h"></div>
-                    </div>
-                    <div class="lid-face front"><div class="stripe-v"></div></div>
-                    <div class="lid-face back"><div class="stripe-v"></div></div>
-                    <div class="lid-face right"><div class="stripe-v"></div></div>
-                    <div class="lid-face left"><div class="stripe-v"></div></div>
+            <div id="gift-interactive" class="gift-container gift-float">
+                <svg class="gift-lid-img" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M65 35 C40 10, 50 -5, 80 15 C95 22, 98 35, 100 35 C102 35, 105 22, 120 15 C150 -5, 160 10, 135 35 Z" fill="#ff9ebb" stroke="#fff" stroke-width="2"/>
+                    <circle cx="100" cy="35" r="12" fill="#ff8cb0" stroke="#fff" stroke-width="2"/>
+                    <rect x="10" y="45" width="180" height="30" rx="4" fill="#ff9ebb" />
+                    <path d="M10 45 L15 75 L175 75 L190 45 Z" fill="#ed8aa6" opacity="0.3"/>
+                    <rect x="85" y="45" width="30" height="30" fill="#fff5f8" />
+                </svg>
 
-                    <div class="bow-container">
-                        <div class="bow-loop-l"></div>
-                        <div class="bow-loop-r"></div>
-                        <div class="bow-knot"></div>
-                    </div>
-                </div>
-
-                <div class="gift-box">
-                    <div class="box-face front"><div class="stripe-v"></div></div>
-                    <div class="box-face back"><div class="stripe-v"></div></div>
-                    <div class="box-face right"><div class="stripe-v"></div></div>
-                    <div class="box-face left"><div class="stripe-v"></div></div>
-                    <div class="box-face top"></div>
-                    <div class="box-face bottom"></div>
-                </div>
+                <svg class="gift-box-img" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="18" y="0" width="164" height="120" rx="4" fill="#ffa2bc" />
+                    <path d="M18 0 L25 120 L157 120 L182 0 Z" fill="#e07792" opacity="0.4"/>
+                    <rect x="85" y="0" width="30" height="120" fill="#fff5f8" />
+                    <rect x="18" y="110" width="164" height="10" fill="#a6445c" opacity="0.4"/>
+                </svg>
             </div>
             
-            <p class="text-xs text-pink-300/40 mt-28 tracking-widest uppercase animate-pulse">Sentuh kado untuk membuka</p>
+            <p class="text-xs text-pink-300/40 mt-24 tracking-widest uppercase animate-pulse">Sentuh kado untuk membuka</p>
         </div>
     </div>
 
@@ -218,7 +121,6 @@
 
 
     <div id="main-content" class="min-h-screen px-4 md:pl-60 md:pr-12 py-12 max-w-6xl mx-auto flex flex-col justify-center items-center">
-        
         <section class="min-h-screen flex flex-col justify-center items-center text-center space-y-4">
             <span class="text-xs tracking-widest text-pink-300/80 uppercase">🌸 a love letter in bloom</span>
             <h1 class="serif-font text-4xl md:text-6xl text-pink-100 font-light leading-tight">
@@ -246,7 +148,6 @@
                 <p class="serif-font italic text-pink-400 text-sm mb-2">our secret garden</p>
                 <h2 class="serif-font text-3xl text-pink-100">Why I Love You</h2>
             </div>
-            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 <div class="bg-[#1b0714] border border-pink-950/40 p-6 rounded-2xl text-center space-y-3">
                     <span class="text-2xl">🌹</span>
@@ -286,7 +187,6 @@
                 <p class="serif-font italic text-pink-400 text-sm mb-2">captured in time</p>
                 <h2 class="serif-font text-3xl text-pink-100">Your Beautiful Pictures</h2>
             </div>
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                 <div class="relative group aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-pink-950/30">
                     <img src="img1.jpg" alt="Foto 1" class="w-full h-full object-cover grayscale brightness-75">
@@ -330,15 +230,28 @@
         let slideInterval;
         let resumeTimeout;
         let isAutoScrolling = false;
+        let userWantsMusic = true; // Menyimpan state manual play/pause
 
-        // Gerak Otomatis (Cinematic Smooth Scroll)
+        // 1. SISTEM DETEKSI METODE PINDAH APLIKASI (Auto Pause Lagu)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Saat web ditinggal buka aplikasi lain / chat WA
+                bgMusic.pause();
+            } else {
+                // Saat doi kembali lagi ke tab browser webmu
+                if (userWantsMusic && !giftScreen.classList.contains('flex')) {
+                    bgMusic.play().catch(e => console.log("Music resume blocked:", e));
+                }
+            }
+        });
+
+        // 2. SISTEM HYBRID SCROLL (Auto-Slide + Manual Jeda)
         function startAutoSlide() {
             if (isAutoScrolling) return;
             isAutoScrolling = true;
             
             slideInterval = setInterval(() => {
                 window.scrollBy(0, 1);
-                // Jika halaman sudah mentok paling bawah, hentikan scroll otomatis
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
                     clearInterval(slideInterval);
                     isAutoScrolling = false;
@@ -346,14 +259,12 @@
             }, 16); 
         }
 
-        // Fungsi Jeda Otomatis & Penjadwalan Ulang Sistem Gerak
         function handleUserInteraction() {
             clearInterval(slideInterval);
             isAutoScrolling = false;
-
             clearTimeout(resumeTimeout);
 
-            // Jika didiamkan selama 3 detik (3000 milidetik), jalankan sistem auto-slide kembali
+            // Diamkan selama 3 detik, maka layar otomatis bergerak turun lagi
             resumeTimeout = setTimeout(() => {
                 if ((window.innerHeight + window.scrollY) < document.body.offsetHeight - 5) {
                     startAutoSlide();
@@ -361,10 +272,10 @@
             }, 3000);
         }
 
-        // Logika Eksekusi Pembukaan Kado
+        // 3. LOGIKA INTERAKSI KADO UTAMA
         giftInteractive.addEventListener('click', function() {
             this.classList.remove('gift-float');
-            this.classList.add('open-box');
+            this.classList.add('open-box'); // Efek pentalan tutup kado memisah
 
             setTimeout(() => {
                 bgMusic.play().catch(err => console.log("Bypass autoplay:", err));
@@ -381,17 +292,13 @@
                 musicWidget.classList.remove('opacity-0', 'pointer-events-none');
                 musicWidget.classList.add('opacity-100', 'pointer-events-auto');
 
-                // Transisi awal pergeseran halaman menuju konten surat utama
                 window.scrollTo({
                     top: window.innerHeight,
                     behavior: 'smooth'
                 });
 
-                // Mulai mengaktifkan sistem navigasi hybrid setelah scroll pembuka selesai
                 setTimeout(() => {
                     startAutoSlide();
-                    
-                    // Pasang pendeteksi interaksi manual (scrolling / swiping layar HP)
                     window.addEventListener('wheel', handleUserInteraction, { passive: true });
                     window.addEventListener('touchmove', handleUserInteraction, { passive: true });
                 }, 1500);
@@ -399,14 +306,16 @@
             }, 2000);
         });
 
-        // Widget Pemutar Musik
+        // CONTROL MUSIC WIDGET BUTTON
         playPauseBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play();
+                userWantsMusic = true;
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
             } else {
                 bgMusic.pause();
+                userWantsMusic = false;
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
             }
