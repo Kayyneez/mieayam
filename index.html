@@ -13,6 +13,7 @@
             background-color: #12030c;
             color: #f3e8ee;
             overflow-x: hidden;
+            margin: 0;
         }
         .serif-font {
             font-family: 'Playfair Display', serif;
@@ -20,14 +21,102 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Animasi Kado Bergetar */
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+        /* --- STYLING KADO 3D YANG LEBIH 'WAH' --- */
+        #gift-screen {
+            perspective: 1000px; /* Memberikan efek 3D kedalaman */
         }
-        .gift-bounce {
-            animation: bounce-slow 2s infinite ease-in-out;
+
+        .gift-container {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
+        
+        .gift-container:hover {
+            transform: rotateY(15deg) rotateX(10deg);
+        }
+
+        /* Styling Sisi Kubus Kado */
+        .gift-box-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: #4a0d24; /* Deep Burgundy/Pink Tua */
+            border: 2px solid #5e112e;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mengatur posisi 3D masing-masing sisi */
+        .front  { transform: translateZ(75px); }
+        .back   { transform: rotateY(180deg) translateZ(75px); }
+        .right  { transform: rotateY(90deg) translateZ(75px); }
+        .left   { transform: rotateY(-90deg) translateZ(75px); }
+        .top    { transform: rotateX(90deg) translateZ(75px); height: 150px; background-color: #5e112e; }
+        .bottom { transform: rotateX(-90deg) translateZ(75px); background-color: #330818; }
+
+        /* Styling Pita Kado (Vertical & Horizontal) */
+        .ribbon-v, .ribbon-h {
+            position: absolute;
+            background-color: #d4af37; /* Gold */
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        .ribbon-v { width: 30px; height: 100%; left: 60px; }
+        .ribbon-h { width: 100%; height: 30px; top: 60px; }
+
+        /* Tutup Kado (Lid) */
+        .gift-lid {
+            position: absolute;
+            width: 160px;
+            height: 40px;
+            background-color: #5e112e; /* Sedikit lebih terang dari box */
+            top: -20px;
+            left: -5px;
+            transform-style: preserve-3d;
+            transform: translateZ(76px); /* Sedikit di depan box */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Pita Emas di Tutup */
+        .lid-ribbon {
+            position: absolute;
+            width: 30px;
+            height: 160px;
+            background-color: #d4af37;
+            transform: rotateX(90deg);
+        }
+        
+        /* --- ANIMASI --- */
+        /* Animasi Bergetar Awal */
+        @keyframes wobble {
+            0%, 100% { transform: rotateY(0) rotateX(0); }
+            25% { transform: rotateY(5deg) rotateX(2deg); }
+            75% { transform: rotateY(-5deg) rotateX(-2deg); }
+        }
+        .gift-wobble {
+            animation: wobble 3s infinite ease-in-out;
+        }
+
+        /* Animasi Buka Kado (Terbang ke Atas & Menghilang) */
+        .gift-container.open .gift-lid {
+            transform: translateZ(76px) translateY(-200px) rotateX(-45deg);
+            opacity: 0;
+        }
+        .gift-container.open .ribbon-v,
+        .gift-container.open .ribbon-h {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
     </style>
 </head>
 <body>
@@ -35,17 +124,35 @@
     <audio id="bg-music" src="audios.mp3" loop></audio>
 
 
-    <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1a0813] transition-all duration-1000">
-        <div class="text-center p-6">
-            <p class="serif-font italic text-pink-300 text-lg mb-4">Ada sebuah kejutan untukmu...</p>
+    <div id="gift-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#1a0813] transition-all duration-1000 origin-top">
+        <div class="text-center p-6 flex flex-col items-center">
+            <p class="serif-font italic text-pink-300 text-lg mb-12">Ada sebuah kejutan untukmu...</p>
             
-            <button id="gift-button" class="gift-bounce focus:outline-none cursor-pointer transform active:scale-95 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-pink-400 drop-shadow-[0_0_15px_rgba(244,143,177,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.5v16.5m-7.5-6h15M5.25 11.25h13.5M9.75 4.5c0-.414.336-.75.75-.75h3c.414 0 .75.336.75.75M9.75 4.5A2.25 2.25 0 007.5 6.75c0 .414.336.75.75.75h3.75m0-3A2.25 2.25 0 0114.25 6.75c0 .414-.336.75-.75.75H9.75" />
-                </svg>
-            </button>
+            <div id="gift-box" class="gift-container gift-wobble">
+                <div class="gift-box-face front">
+                    <div class="ribbon-v"></div>
+                    <div class="ribbon-h"></div>
+                </div>
+                <div class="gift-box-face back">
+                    <div class="ribbon-v"></div>
+                </div>
+                <div class="gift-box-face right">
+                    <div class="ribbon-v"></div>
+                </div>
+                <div class="gift-box-face left">
+                    <div class="ribbon-v"></div>
+                </div>
+                <div class="gift-box-face top"></div>
+                <div class="gift-box-face bottom"></div>
+                
+                <div class="gift-lid">
+                    <div class="lid-ribbon"></div>
+                    <div class="absolute w-12 h-12 bg-[#d4af37] rounded-full transform rotateY(45deg) -top-6"></div>
+                    <div class="absolute w-12 h-12 bg-[#d4af37] rounded-full transform rotateY(-45deg) -top-6"></div>
+                </div>
+            </div>
             
-            <p class="text-xs text-gray-400 mt-6 tracking-widest uppercase">Klik untuk membuka kado</p>
+            <p class="text-xs text-gray-400 mt-16 tracking-widest uppercase animate-pulse">Klik Kado Untuk Membuka</p>
         </div>
     </div>
 
@@ -178,7 +285,8 @@
 
     <script>
         const giftScreen = document.getElementById('gift-screen');
-        const giftButton = document.getElementById('gift-button');
+        const giftBox = document.getElementById('gift-box');
+        const mainContent = document.getElementById('main-content');
         const musicWidget = document.getElementById('music-widget');
         const bgMusic = document.getElementById('bg-music');
         const playPauseBtn = document.getElementById('play-pause-btn');
@@ -186,22 +294,40 @@
         const pauseIcon = document.getElementById('pause-icon');
 
         // Aksi ketika Kado Diklik
-        giftButton.addEventListener('click', () => {
-            // 1. Putar Musik Otomatis
-            bgMusic.play().catch(error => {
-                console.log("Autoplay dicegah browser, harus interaksi dulu:", error);
-            });
+        giftBox.addEventListener('click', function() {
+            // 1. Tambahkan class 'open' untuk memicu animasi tutup kado terbang
+            this.classList.remove('gift-wobble'); // Hentikan getaran
+            this.classList.add('open'); 
 
-            // 2. Transisi Menghilangkan Layar Kado (Slide Up & Fade Out)
-            giftScreen.style.transform = 'translateY(-100%)';
-            giftScreen.style.opacity = '0';
+            // 2. Putar Musik Otomatis (Amazing - Rex Orange County)
+            // Menggunakan sedikit delay agar pas dengan tutup kado terangkat
+            setTimeout(() => {
+                bgMusic.play().catch(error => {
+                    console.log("Autoplay dicegah browser, harus interaksi dulu:", error);
+                });
+            }, 300);
+
+            // 3. Transisi Menghilangkan Layar Kado (Menyusut ke Atas & Fade Out)
+            setTimeout(() => {
+                giftScreen.style.transform = 'scaleY(0)';
+                giftScreen.style.opacity = '0';
+            }, 1200); // Memberikan waktu animasi kado terbuka dulu
             
-            // 3. Tampilkan Widget Pemutar Musik di Kiri
+            // 4. Tampilkan Widget Pemutar Musik di Kiri & Scroll Otomatis ke Konten
             setTimeout(() => {
                 giftScreen.classList.add('hidden');
+                
+                // Tampilkan Widget Musik
                 musicWidget.classList.remove('opacity-0', 'pointer-events-none');
                 musicWidget.classList.add('opacity-100', 'pointer-events-auto');
-            }, 1000);
+
+                // Scroll otomatis ke bawah (Section Pembuka)
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+
+            }, 2200); // Total waktu transisi sebelum masuk menu utama
         });
 
         // Pengatur Tombol Play / Pause Musik
@@ -218,4 +344,4 @@
         });
     </script>
 </body>
-              </html>
+                        </html>
